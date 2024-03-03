@@ -3,9 +3,9 @@ import { AuthPage } from 'src/pages/authPage';
 import { FavoritesPage } from 'src/pages/favoritesPage';
 import { RegisterPage } from 'src/pages/registerPage';
 import { FilmPage } from 'src/pages/filmPage';
-import { FilmsPage } from '../pages/filmsPage/ui';
-import { AppRoute } from '../shared/types/types.tsx';
-import { MainLayout } from '../shared/ui/templates/MainLayout.tsx';
+import { FilmsPage } from 'src/pages/filmsPage/ui';
+import { AppRoute } from 'src/shared/types/types.tsx';
+import { MainLayout } from 'src/shared/ui/templates/MainLayout.tsx';
 
 export const createRouter = () => {
   return createBrowserRouter([

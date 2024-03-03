@@ -1,4 +1,4 @@
-import { Films } from 'src/widjets/films';
+import { Films } from 'src/widgets/films';
 
 export const FilmsPage = () => {
   return <Films />;
