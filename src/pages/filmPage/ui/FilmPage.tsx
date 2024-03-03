@@ -1,4 +1,4 @@
-import { FilmDetails } from 'src/widjets/fillmDetails';
+import { FilmDetails } from 'src/widgets/fillmDetails';
 
 export const FilmPage = () => {
   return <FilmDetails />;
