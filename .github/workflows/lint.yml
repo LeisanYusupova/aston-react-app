@@ -1,0 +1,21 @@
+name: Lint
+run-name: Lint for errors and code style violations
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  eslint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: install deps
+        run: npm install
+      - name: lint
+        run: npm run lint
