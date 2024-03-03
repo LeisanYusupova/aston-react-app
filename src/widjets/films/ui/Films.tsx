@@ -1,6 +1,7 @@
-import { FilmCard } from '../../entities/film';
 import { useState, useEffect } from 'react';
-import { FilmInterface } from '../../shared/types/types.tsx';
+import { FilmCard } from 'src/entities/film';
+import { FilmInterface } from 'src/shared/types/types.tsx';
+import { API_KEY } from 'src/api/API.tsx';
 import s from './Films.module.css';
 
 export const Films = () => {
@@ -11,7 +12,7 @@ export const Films = () => {
     fetch('https://kinopoiskapiunofficial.tech/api/v2.2/films', {
       method: 'GET',
       headers: {
-        'X-API-KEY': '0e28ff12-d850-4ac5-b417-3d42b162dc04',
+        'X-API-KEY': API_KEY,
         'Content-Type': 'application/json',
       },
     })

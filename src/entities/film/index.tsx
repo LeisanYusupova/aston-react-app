@@ -1,1 +1,1 @@
-export { FilmCard } from './FilmCard.tsx';
+export { FilmCard } from './ui/FilmCard.tsx'
