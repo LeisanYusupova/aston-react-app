@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useState, useContext } from 'react';
+import { createContext, ReactNode, useState, useContext, useMemo } from 'react';
 import { ThemeContextInterface } from 'src/app/context/ThemeContextTypes.ts';
 
 export interface Props {
@@ -27,8 +27,11 @@ export const ThemeProvider = ({ children }: Props) => {
   };
 
   const value = { isDark, toggleTheme };
+  const memoizedValue = useMemo(() => value, [value]);
 
   return (
-    <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
+    <ThemeContext.Provider value={memoizedValue}>
+      {children}
+    </ThemeContext.Provider>
   );
 };

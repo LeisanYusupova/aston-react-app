@@ -34,6 +34,14 @@ export interface FavoriteFilmInterface {
   image: string;
 }
 
+export type FilmCardInterface = {
+  id: number;
+  name: string;
+  country: string;
+  year: number;
+  image: string;
+};
+
 export type FavoritesState = {
   films: FavoriteFilmInterface[];
 };

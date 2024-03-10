@@ -1,19 +1,12 @@
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { FilmCardInterface } from 'src/shared/types/types.tsx';
 import { addToFavorites } from '../../../features/favoriteFilms/favoriteFilmsSlice.ts';
 import s from './FilmCard.module.css';
 
-type Props = {
-  id: number;
-  name: string;
-  country: string;
-  year: number;
-  image: string;
-};
-
-export const FilmCard = (props: Props) => {
+export const FilmCard = (props: FilmCardInterface) => {
   const dispatch = useDispatch();
-  const handleFavoritesClick = (props: Props) => {
+  const handleFavoritesClick = (props: FilmCardInterface) => {
     dispatch(addToFavorites(props));
   };
   return (
