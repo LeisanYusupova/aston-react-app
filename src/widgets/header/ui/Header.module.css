@@ -2,8 +2,21 @@
     box-sizing: border-box;
     width: 100%;
     height: 100px;
-    background-color: #edadd1;
     padding: 20px 80px 20px 110px;
     display: flex;
     justify-content: space-between;
+}
+
+.button_wrapper {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.dark {
+    background-color: #b3869b;
+}
+
+.light {
+    background-color: #edadd1;
 }

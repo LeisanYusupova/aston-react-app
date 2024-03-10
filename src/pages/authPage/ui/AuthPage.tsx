@@ -1,3 +1,9 @@
+import { AuthForm } from 'src/widgets/authForm/ui/AuthForm.tsx';
+
 export const AuthPage = () => {
-  return <div>Auth page</div>;
+  return (
+    <div>
+      <AuthForm />
+    </div>
+  );
 };

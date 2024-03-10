@@ -2,3 +2,8 @@
     height: 100vh;
     width: 100vw;
 }
+
+.dark {
+    background-color: #888888;
+    z-index: 2;
+}

@@ -6,6 +6,8 @@
     height: 200px;
     border: 1px solid #edadd1;
     box-shadow: 0 2px 2px 0 #edadd1;
+    background-color: white;
+    z-index: 20;
 }
 
 .card_container {
