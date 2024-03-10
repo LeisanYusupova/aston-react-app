@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { addToFavorites } from '../../../features/favoriteFilms/favoriteFilmsSlice.ts';
 import s from './FilmCard.module.css';
 
 type Props = {
@@ -10,6 +12,10 @@ type Props = {
 };
 
 export const FilmCard = (props: Props) => {
+  const dispatch = useDispatch();
+  const handleFavoritesClick = (props: Props) => {
+    dispatch(addToFavorites(props));
+  };
   return (
     <div className={s.card_wrapper}>
       <img src={`${props.image}`} alt="Превью изображение" />
@@ -22,7 +28,12 @@ export const FilmCard = (props: Props) => {
           <Link to={`/${props.id}`}>
             <button className={s.card_button}>Подробнее</button>
           </Link>
-          <button className={s.card_button}>Добавить в избранное</button>
+          <button
+            className={s.card_button}
+            onClick={() => handleFavoritesClick(props)}
+          >
+            Добавить в избранное
+          </button>
         </div>
       </div>
     </div>

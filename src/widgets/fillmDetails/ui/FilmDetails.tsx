@@ -1,54 +1,29 @@
-import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { FilmDetailInterface } from '../../../shared/types/types.tsx';
+import { useGetFilmDetailsQuery } from 'src/features/films/filmsSlice.ts';
 import s from './FilmDetails.module.css';
 
 export const FilmDetails = () => {
-  const [film, setFilm] = useState<FilmDetailInterface | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
   const params = useParams();
-  useEffect(() => {
-    fetch(`https://kinopoiskapiunofficial.tech/api/v2.2/films/${params.id}`, {
-      method: 'GET',
-      headers: {
-        'X-API-KEY': '0e28ff12-d850-4ac5-b417-3d42b162dc04',
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error('Failed to fetch data');
-        }
-        return res.json();
-      })
-      .then((json) => {
-        setFilm(json);
-        setLoading(false);
-      })
-      .catch((err) => {
-        setError(err.message);
-        setLoading(false);
-      });
-  }, []);
+  const { data, isLoading, error } = useGetFilmDetailsQuery(params.id || '');
 
-  if (loading) {
+  if (isLoading) {
     return <p>Loading...</p>;
   }
 
   if (error) {
-    return <p>Error: {error}</p>;
+    return <p>Error</p>;
   }
-
-  return (
-    <div className={s.wrapper}>
-      <img src={film?.posterUrl} alt="film poster" />
-      <div className={s.container}>
-        <h2>{film?.nameRu}</h2>
-        <h3>{film?.year}</h3>
-        <span>{film?.description}</span>
-        <span>{film?.nameOriginal}</span>
+  if (data) {
+    return (
+      <div className={s.wrapper}>
+        <img src={data.posterUrl} alt="film poster" />
+        <div className={s.container}>
+          <h2>{data.nameRu}</h2>
+          <h3>{data.year}</h3>
+          <span>{data.description}</span>
+          <span>{data.nameOriginal}</span>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 };

@@ -1,0 +1,21 @@
+.input {
+    height: 40px;
+    border-radius: 8px;
+    border: 1px solid grey;
+    padding: 0 10px;
+    background-color: white;
+    &:focus {
+        border-color: red;
+    }
+}
+.input_wrapper {
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.errorMessage {
+    color: red;
+    font-size: 12px;
+}

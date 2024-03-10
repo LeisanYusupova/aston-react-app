@@ -4,7 +4,7 @@ import { createRouter } from './appRouter.tsx';
 
 function App() {
   return (
-    <Suspense fallback={<div></div>}>
+    <Suspense fallback={<div>Loading...</div>}>
       <RouterProvider router={createRouter()} />
     </Suspense>
   );

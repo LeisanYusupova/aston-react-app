@@ -1,11 +1,11 @@
-import { useNavigate } from 'react-router-dom';
 import { Input } from 'src/shared/ui/input/Input.tsx';
 import { useForm } from 'react-hook-form';
-import { FormSchema } from 'src/shared/lib/yup/yup.ts';
 import { yupResolver } from '@hookform/resolvers/yup';
-import s from './AuthForm.module.css';
+import { FormSchema } from 'src/shared/lib/yup/yup.ts';
+import { useNavigate } from 'react-router-dom';
+import s from './RegisterForm.module.css';
 
-export const AuthForm = () => {
+export const RegisterForm = () => {
   const { register, handleSubmit, formState } = useForm({
     resolver: yupResolver(FormSchema),
   });
@@ -13,12 +13,12 @@ export const AuthForm = () => {
   const { errors } = formState;
 
   const handleLogin = () => {
-    localStorage.setItem('action', 'auth');
+    localStorage.setItem('action', 'register');
     navigate('/');
   };
   return (
     <div className={s.wrapper}>
-      <h2 className={s.input_title}>Авторизация</h2>
+      <h2 className={s.input_title}>Регистрация</h2>
       <form className={s.form_wrapper} onSubmit={handleSubmit(handleLogin)}>
         <Input
           label={'Логин'}

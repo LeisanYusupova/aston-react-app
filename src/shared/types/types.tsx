@@ -22,6 +22,22 @@ export interface FilmInterface {
   posterUrlPreview: string;
 }
 
+export interface FilmsInterface {
+  items: FilmInterface[];
+}
+
+export interface FavoriteFilmInterface {
+  id: number;
+  name: string;
+  country: string;
+  year: number;
+  image: string;
+}
+
+export type FavoritesState = {
+  films: FavoriteFilmInterface[];
+};
+
 export interface FilmDetailInterface {
   kinopoiskId: number;
   kinopoiskHDId: string;
@@ -70,7 +86,7 @@ export interface FilmDetailInterface {
   lastSync: string;
 }
 export enum AppRoute {
-  Signin = '/signin',
+  Signin = 'signin',
   Root = '/',
   Id = ':id',
   Favorites = 'favorites',
