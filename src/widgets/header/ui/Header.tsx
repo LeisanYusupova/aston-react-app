@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from 'src/shared/hooks/useAuth.ts';
 import { removeUser } from 'src/features/userProcess/userProcessSlice.ts';
 import { useTheme } from 'src/app/context/ThemeContext.tsx';
@@ -11,11 +12,15 @@ import s from './Header.module.css';
 
 export const Header = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { isDark, toggleTheme } = useTheme();
   const { isAuth, email } = useAuth();
 
   const handleLogOut = () => {
     dispatch(removeUser());
+  };
+  const handleHistoryClick = () => {
+    navigate('/history');
   };
 
   return (
@@ -45,7 +50,7 @@ export const Header = () => {
         <button>Избранное</button>
       </Link>
       <SearchFilmsInput />
-      <button>История поиска</button>
+      <button onClick={handleHistoryClick}>История поиска</button>
       <div className={s.button_wrapper}>
         {isAuth ? (
           <div>

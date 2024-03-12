@@ -7,6 +7,7 @@ import { FilmPage } from 'src/pages/filmPage';
 import { FilmsPage } from 'src/pages/filmsPage/ui';
 import { MainLayout } from 'src/shared/ui/templates/MainLayout.tsx';
 import { SearchPage } from 'src/pages/searchPage';
+import { HistoryPage } from 'src/pages/historyPage/ui/HistoryPage.tsx';
 
 export const createRouter = () => {
   return createBrowserRouter([
@@ -21,6 +22,10 @@ export const createRouter = () => {
         {
           path: AppRoute.Search,
           element: <SearchPage />,
+        },
+        {
+          path: AppRoute.History,
+          element: <HistoryPage />,
         },
         {
           path: AppRoute.Signin,

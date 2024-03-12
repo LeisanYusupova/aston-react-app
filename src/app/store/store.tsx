@@ -3,6 +3,7 @@ import { filmsApi } from 'src/features/films/filmsSlice.ts';
 import { searchApi } from 'src/features/searchFilmsApi/searchSlice.ts';
 import userProcessReducer from 'src/features/userProcess/userProcessSlice.ts';
 import favoritesReducer from '../../features/favoriteFilms/favoriteFilmsSlice.ts';
+import searchFilmsReducer from '../../features/searchFilms/searchFilmsSlice.ts';
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     [searchApi.reducerPath]: searchApi.reducer,
     favorites: favoritesReducer,
     userProcess: userProcessReducer,
+    searchFilms: searchFilmsReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()

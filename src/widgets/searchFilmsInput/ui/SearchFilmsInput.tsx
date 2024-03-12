@@ -3,9 +3,12 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSearchFilmsQuery } from 'src/features/searchFilmsApi/searchSlice.ts';
 import { SearchFilmInterface } from 'src/shared/types/types.tsx';
+import { useDispatch } from 'react-redux';
+import { setSearch } from 'src/features/searchFilms/searchFilmsSlice.ts';
 import s from './SearchFilmsInput.module.css';
 
 export const SearchFilmsInput = () => {
+  const dispatch = useDispatch();
   const [foundFilms, setFilms] = useState<SearchFilmInterface[]>([]);
   const [keyword, setKeyword] = useState('');
   const { data } = useSearchFilmsQuery(keyword);
@@ -17,7 +20,7 @@ export const SearchFilmsInput = () => {
 
   useEffect(() => {
     if (data) {
-      setFilms(data.films);
+      setFilms(data);
     }
   }, [data]);
   const navigate = useNavigate();
@@ -29,8 +32,8 @@ export const SearchFilmsInput = () => {
 
   const handleSearchClick = (search: string) => {
     setFilms([]);
+    dispatch(setSearch(search));
     navigate(`/search?search=${search}`);
-    setKeyword('');
   };
 
   return (

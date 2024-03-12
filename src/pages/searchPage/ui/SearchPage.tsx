@@ -18,17 +18,16 @@ export const SearchPage = () => {
   if (data) {
     return (
       <div className={s.list_wrapper}>
-        {data.films!.length > 0 &&
-          data.films.map((item: SearchFilmInterface) => (
-            <FilmCard
-              key={item.filmId}
-              id={item.filmId}
-              name={item.nameRu}
-              country={item.countries[0].country}
-              year={item.year}
-              image={item.posterUrlPreview}
-            />
-          ))}
+        {data.map((item: SearchFilmInterface) => (
+          <FilmCard
+            key={item.filmId}
+            id={item.filmId}
+            name={item.nameRu}
+            country={item.countries[0].country}
+            year={item.year}
+            image={item.posterUrlPreview}
+          />
+        ))}
       </div>
     );
   }

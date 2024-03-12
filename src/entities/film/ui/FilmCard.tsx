@@ -14,7 +14,7 @@ export const FilmCard = (props: FilmCardInterface) => {
     state.favorites.films.some((item) => item.id === props.id),
   );
   const handleFavoritesClick = (props: FilmCardInterface) => {
-    if (isFavorite === true) {
+    if (isFavorite) {
       dispatch(removeFromFavorites(props.id));
     } else {
       dispatch(addToFavorites(props));

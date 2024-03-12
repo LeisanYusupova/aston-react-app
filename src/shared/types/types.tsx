@@ -26,6 +26,10 @@ export interface FilmsInterface {
   items: FilmInterface[];
 }
 
+export interface SearchInterfaceFromApi {
+  films: SearchFilmInterface[];
+}
+
 export interface FavoriteFilmInterface {
   id: number;
   name: string;
@@ -49,6 +53,10 @@ export type FavoritesState = {
 export type UserProcessState = {
   email: string | null;
   id: string | null;
+};
+
+export type SearchFilmsState = {
+  keywords: string[];
 };
 
 export interface FilmDetailInterface {
@@ -121,4 +129,5 @@ export enum AppRoute {
   Favorites = 'favorites',
   Signup = 'signup',
   Search = 'search',
+  History = 'history',
 }

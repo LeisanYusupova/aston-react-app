@@ -1,5 +1,6 @@
 import { API_KEY } from 'src/api/API.tsx';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { SearchInterfaceFromApi } from 'src/shared/types/types.tsx';
 
 export const searchApi = createApi({
   reducerPath: 'searchApi',
@@ -15,6 +16,9 @@ export const searchApi = createApi({
     searchFilms: builder.query({
       query: (keyword: string) =>
         `api/v2.1/films/search-by-keyword?keyword=${keyword}`,
+      transformResponse: (response: SearchInterfaceFromApi) => {
+        return response.films;
+      },
     }),
   }),
 });
