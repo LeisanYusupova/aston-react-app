@@ -13,7 +13,7 @@ export const favoriteFilms = createSlice({
       state.films.push(action.payload);
     },
     removeFromFavorites: (state, action) => {
-      state.films.filter((obj) => obj.id !== action.payload);
+      state.films = state.films.filter((obj) => obj.id !== action.payload);
     },
   },
 });

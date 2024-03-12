@@ -1,5 +1,6 @@
 import { API_KEY } from 'src/api/API.tsx';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { FilmsInterface } from 'src/shared/types/types.tsx';
 
 export const filmsApi = createApi({
   reducerPath: 'filmsApi',
@@ -14,7 +15,7 @@ export const filmsApi = createApi({
   endpoints: (builder) => ({
     getFilms: builder.query({
       query: () => 'api/v2.2/films',
-      transformResponse: (response) => {
+      transformResponse: (response: FilmsInterface) => {
         return response.items.slice(8);
       },
     }),

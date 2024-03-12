@@ -1,5 +1,5 @@
-import { RegisterForm } from 'src/widgets/registerForm';
+import { SignUp } from 'src/widgets/signUp/ui/SignUp.tsx';
 
 export const RegisterPage = () => {
-  return <RegisterForm />;
+  return <SignUp />;
 };
