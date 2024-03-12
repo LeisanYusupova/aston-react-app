@@ -46,6 +46,11 @@ export type FavoritesState = {
   films: FavoriteFilmInterface[];
 };
 
+export type UserProcessState = {
+  email: string | null;
+  id: string | null;
+};
+
 export interface FilmDetailInterface {
   kinopoiskId: number;
   kinopoiskHDId: string;
@@ -93,10 +98,27 @@ export interface FilmDetailInterface {
   has3D: false;
   lastSync: string;
 }
+
+export interface SearchFilmInterface {
+  filmId: number;
+  nameRu: string;
+  nameEn: string;
+  type: string;
+  year: number;
+  description: string;
+  filmLength: string;
+  countries: CountriesType[];
+  genres: GenresType[];
+  rating: string;
+  ratingVoteCount: string;
+  posterUrl: string;
+  posterUrlPreview: string;
+}
 export enum AppRoute {
   Signin = 'signin',
   Root = '/',
   Id = ':id',
   Favorites = 'favorites',
   Signup = 'signup',
+  Search = 'search',
 }

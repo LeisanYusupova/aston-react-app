@@ -5,6 +5,7 @@ import { ThemeProvider } from 'src/app/context/ThemeContext.tsx';
 import App from './app/App.tsx';
 import './index.css';
 import { store } from './app/store';
+import './features/firebase/firebase.ts';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

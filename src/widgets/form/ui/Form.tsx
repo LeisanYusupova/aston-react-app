@@ -2,31 +2,35 @@ import { Input } from 'src/shared/ui/input/Input.tsx';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FormSchema } from 'src/shared/lib/yup/yup.ts';
-import { useNavigate } from 'react-router-dom';
-import s from './RegisterForm.module.css';
+import s from './Form.module.css';
 
-export const RegisterForm = () => {
+type Props = {
+  title: string;
+  handleClick: (email: string, password: string) => void;
+};
+
+export const Form = ({ title, handleClick }: Props) => {
   const { register, handleSubmit, formState } = useForm({
     resolver: yupResolver(FormSchema),
   });
-  const navigate = useNavigate();
   const { errors } = formState;
 
-  const handleLogin = () => {
-    localStorage.setItem('action', 'register');
-    navigate('/');
-  };
   return (
     <div className={s.wrapper}>
-      <h2 className={s.input_title}>Регистрация</h2>
-      <form className={s.form_wrapper} onSubmit={handleSubmit(handleLogin)}>
+      <h2 className={s.input_title}>{title}</h2>
+      <form
+        className={s.form_wrapper}
+        onSubmit={handleSubmit((data) =>
+          handleClick(data.email, data.password),
+        )}
+      >
         <Input
           label={'Логин'}
           {...register('email')}
           error={errors?.email?.message}
         ></Input>
         <Input
-          label={'Password'}
+          label={'Пароль'}
           {...register('password')}
           error={errors?.password?.message}
         />

@@ -1,13 +1,24 @@
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { FilmCardInterface } from 'src/shared/types/types.tsx';
-import { addToFavorites } from '../../../features/favoriteFilms/favoriteFilmsSlice.ts';
+import { RootState } from 'src/app/store/store.tsx';
+import {
+  addToFavorites,
+  removeFromFavorites,
+} from 'src/features/favoriteFilms/favoriteFilmsSlice.ts';
 import s from './FilmCard.module.css';
 
 export const FilmCard = (props: FilmCardInterface) => {
   const dispatch = useDispatch();
+  const isFavorite = useSelector((state: RootState) =>
+    state.favorites.films.some((item) => item.id === props.id),
+  );
   const handleFavoritesClick = (props: FilmCardInterface) => {
-    dispatch(addToFavorites(props));
+    if (isFavorite === true) {
+      dispatch(removeFromFavorites(props.id));
+    } else {
+      dispatch(addToFavorites(props));
+    }
   };
   return (
     <div className={s.card_wrapper}>
@@ -25,7 +36,7 @@ export const FilmCard = (props: FilmCardInterface) => {
             className={s.card_button}
             onClick={() => handleFavoritesClick(props)}
           >
-            Добавить в избранное
+            {isFavorite ? 'Удалить из избранного' : 'Добавить в избранное'}
           </button>
         </div>
       </div>
