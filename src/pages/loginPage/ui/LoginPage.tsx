@@ -1,9 +1,11 @@
-import { Login } from 'src/widgets/login/ui/Login.tsx';
+import { Login } from 'src/features/login/ui/Login.tsx';
 
-export const LoginPage = () => {
+const LoginPage = () => {
   return (
     <div>
       <Login />
     </div>
   );
 };
+
+export default LoginPage;

@@ -2,7 +2,7 @@ import { Form } from 'src/widgets/form';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { setUser } from 'src/features/userProcess/userProcessSlice.ts';
+import { setUser } from 'src/features/redux/userProcess/userProcessSlice.ts';
 
 export const SignUp = () => {
   const dispatch = useDispatch();

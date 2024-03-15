@@ -1,9 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { filmsApi } from 'src/features/films/filmsSlice.ts';
-import { searchApi } from 'src/features/searchFilmsApi/searchSlice.ts';
-import userProcessReducer from 'src/features/userProcess/userProcessSlice.ts';
-import favoritesReducer from '../../features/favoriteFilms/favoriteFilmsSlice.ts';
-import searchFilmsReducer from '../../features/searchFilms/searchFilmsSlice.ts';
+import { filmsApi } from 'src/features/redux/filmsApi/filmsSlice.ts';
+import { searchApi } from 'src/features/redux/searchFilmsApi/searchSlice.ts';
+import userProcessReducer from 'src/features/redux/userProcess/userProcessSlice.ts';
+import favoritesReducer from 'src/features/redux/favoriteFilms/favoriteFilmsSlice.ts';
+import searchFilmsReducer from 'src/features/redux/searchFilms/searchFilmsSlice.ts';
+import suggestionsReducer from 'src/features/redux/suggestions/suggestionsSlice.ts';
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     favorites: favoritesReducer,
     userProcess: userProcessReducer,
     searchFilms: searchFilmsReducer,
+    suggestions: suggestionsReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()

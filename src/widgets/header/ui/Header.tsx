@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from 'src/shared/hooks/useAuth.ts';
-import { removeUser } from 'src/features/userProcess/userProcessSlice.ts';
-import { useTheme } from 'src/app/context/ThemeContext.tsx';
-import { SearchFilmsInput } from 'src/widgets/searchFilmsInput/ui/SearchFilmsInput.tsx';
+import { useAuth } from 'src/shared/hooks/useAuth';
+import { removeUser } from 'src/features/redux/userProcess/userProcessSlice';
+import { useTheme } from 'src/app/context/ThemeContext';
+import { SearchFilmsInput } from 'src/widgets/searchFilmsInput/ui/SearchFilmsInput';
 import { useDispatch } from 'react-redux';
-import logo from '../../../assets/icon-film.png';
-import sunIcon from '../../../assets/icons_sun.png';
-import moonIcon from '../../../assets/icons_moon.png';
+import logo from 'src/assets/icon-film.png';
+import sunIcon from 'src/assets/icons_sun.png';
+import moonIcon from 'src/assets/icons_moon.png';
 import s from './Header.module.css';
 
 export const Header = () => {

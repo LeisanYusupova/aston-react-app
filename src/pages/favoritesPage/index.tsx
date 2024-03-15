@@ -1,1 +1,1 @@
-export { FavoritesPage } from './ui/FavoritesPage.tsx';
+export * from './ui/FavoritesPage.tsx';

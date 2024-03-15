@@ -16,3 +16,11 @@
     flex-direction: column;
     gap: 10px;
 }
+
+.card_button {
+    padding: 0px;
+    width: 150px;
+    height: 50px;
+    border: none;
+    background-color: #edadd1;
+}

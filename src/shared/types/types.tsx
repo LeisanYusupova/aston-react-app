@@ -8,18 +8,18 @@ export type GenresType = {
 
 export interface FilmInterface {
   kinopoiskId: number;
-  imdbId: string;
+  imdbId?: string;
   nameRu: string;
-  nameEn: string;
-  nameOriginal: string;
-  countries: CountriesType[];
-  genres: GenresType[];
-  ratingKinopoisk: number;
-  ratingImdb: number;
+  nameEn?: string;
+  nameOriginal?: string;
+  countries?: CountriesType[];
+  genres?: GenresType[];
+  ratingKinopoisk?: number;
+  ratingImdb?: number;
   year: number;
-  type: string;
-  posterUrl: string;
-  posterUrlPreview: string;
+  type?: string;
+  posterUrl?: string;
+  posterUrlPreview?: string;
 }
 
 export interface FilmsInterface {
@@ -125,7 +125,7 @@ export interface SearchFilmInterface {
 export enum AppRoute {
   Signin = 'signin',
   Root = '/',
-  Id = ':id',
+  Id = '/:id',
   Favorites = 'favorites',
   Signup = 'signup',
   Search = 'search',
