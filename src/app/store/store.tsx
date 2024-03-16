@@ -5,6 +5,7 @@ import userProcessReducer from 'src/features/redux/userProcess/userProcessSlice.
 import favoritesReducer from 'src/features/redux/favoriteFilms/favoriteFilmsSlice.ts';
 import searchFilmsReducer from 'src/features/redux/searchFilms/searchFilmsSlice.ts';
 import suggestionsReducer from 'src/features/redux/suggestions/suggestionsSlice.ts';
+import { listenerMiddleware } from 'src/shared/middlewares/searchMiddleware.ts';
 
 export const store = configureStore({
   reducer: {
@@ -18,7 +19,8 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
       .concat(filmsApi.middleware)
-      .concat(searchApi.middleware),
+      .concat(searchApi.middleware)
+      .prepend(listenerMiddleware.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

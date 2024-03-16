@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom';
-import { useFavorites } from 'src/shared/hooks/useFavorites.ts';
 import { FilmCardInterface } from 'src/shared/types/types.tsx';
+import { useAuth } from 'src/shared/hooks/useAuth.ts';
+import { useFavorites } from 'src/shared/hooks/useFavorites.ts';
 import s from './FilmCard.module.css';
 
 export const FilmCard = (props: FilmCardInterface) => {
+  const { isAuth } = useAuth();
   const { isFavorite, handleFavoritesClick } = useFavorites(props);
   return (
     <div className={s.card_wrapper}>
@@ -17,12 +19,11 @@ export const FilmCard = (props: FilmCardInterface) => {
           <Link to={`/${props.id}`}>
             <button className={s.card_button}>Подробнее</button>
           </Link>
-          <button
-            className={s.card_button}
-            onClick={() => handleFavoritesClick()}
-          >
-            {isFavorite ? 'Удалить из избранного' : 'Добавить в избранное'}
-          </button>
+          {isAuth && (
+            <button className={s.card_button} onClick={handleFavoritesClick}>
+              {isFavorite ? 'Удалить из избранного' : 'Добавить в избранное'}
+            </button>
+          )}
         </div>
       </div>
     </div>

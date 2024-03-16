@@ -57,6 +57,7 @@ export type UserProcessState = {
 
 export type SearchFilmsState = {
   keywords: string[];
+  user: string | null;
 };
 
 export interface FilmDetailInterface {
@@ -125,7 +126,7 @@ export interface SearchFilmInterface {
 export enum AppRoute {
   Signin = 'signin',
   Root = '/',
-  Id = '/:id',
+  Id = ':id',
   Favorites = 'favorites',
   Signup = 'signup',
   Search = 'search',

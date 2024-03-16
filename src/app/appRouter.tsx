@@ -5,6 +5,7 @@ import { FilmsPage } from 'src/pages/filmsPage/ui';
 import { MainLayout } from 'src/shared/ui/templates/MainLayout.tsx';
 import { HistoryPage } from 'src/pages/historyPage/ui/HistoryPage.tsx';
 import { SearchPage } from 'src/pages/searchPage';
+import { LoadingScreen } from 'src/shared/ui/loader';
 
 export const LoginPage = lazy(() => import('../pages/loginPage/ui/LoginPage'));
 export const FavoritesPage = lazy(
@@ -32,7 +33,7 @@ export const createRouter = () => {
         {
           path: AppRoute.Signin,
           element: (
-            <Suspense fallback={'Loading...'}>
+            <Suspense fallback={<LoadingScreen />}>
               <LoginPage />
             </Suspense>
           ),
@@ -40,7 +41,7 @@ export const createRouter = () => {
         {
           path: AppRoute.Favorites,
           element: (
-            <Suspense fallback={'Loading...'}>
+            <Suspense fallback={<LoadingScreen />}>
               <FavoritesPage />
             </Suspense>
           ),
@@ -48,7 +49,7 @@ export const createRouter = () => {
         {
           path: AppRoute.Signup,
           element: (
-            <Suspense fallback={'Loading...'}>
+            <Suspense fallback={<LoadingScreen />}>
               <RegisterPage />
             </Suspense>
           ),
@@ -62,7 +63,7 @@ export const createRouter = () => {
             {
               path: AppRoute.Id,
               element: (
-                <Suspense fallback={'Loading...'}>
+                <Suspense fallback={<LoadingScreen />}>
                   <FilmPage />
                 </Suspense>
               ),

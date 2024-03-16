@@ -3,6 +3,7 @@ import { SearchFilmsState } from 'src/shared/types/types.tsx';
 
 const initialState: SearchFilmsState = {
   keywords: [],
+  user: null,
 };
 
 export const searchFilms = createSlice({
@@ -10,7 +11,8 @@ export const searchFilms = createSlice({
   initialState,
   reducers: {
     setSearch: (state, action) => {
-      state.keywords.push(action.payload);
+      state.keywords.push(action.payload.keywords);
+      state.user = action.payload.user;
     },
   },
 });

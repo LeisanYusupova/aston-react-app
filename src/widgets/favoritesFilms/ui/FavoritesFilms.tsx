@@ -9,7 +9,7 @@ export const FavoritesFilms = () => {
   if (films) {
     return (
       <div className={s.list_wrapper}>
-        {films!.length > 0 &&
+        {(films!.length > 0 && console.log(films)) ||
           films.map((item: FavoriteFilmInterface) => (
             <FilmCard
               key={item.id}

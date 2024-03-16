@@ -1,8 +1,10 @@
 import React from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from 'src/shared/hooks/useAuth.ts';
 import { useSearchFilmsQuery } from 'src/features/redux/searchFilmsApi/searchSlice.ts';
 import { useDispatch } from 'react-redux';
+import { useDebounce } from 'src/shared/hooks/useDebounce.ts';
 import { setSearch } from 'src/features/redux/searchFilms/searchFilmsSlice.ts';
 import { Suggestions } from 'src/widgets/suggestions/ui/Suggestions.tsx';
 import s from './SearchFilmsInput.module.css';
@@ -11,7 +13,9 @@ export const SearchFilmsInput = () => {
   const dispatch = useDispatch();
   const [isOpenSuggestions, setIsOpenSuggestions] = useState(false);
   const [keyword, setKeyword] = useState('');
-  const { data: foundFilms } = useSearchFilmsQuery(keyword);
+
+  const searchText = useDebounce(keyword, 200);
+  const { data: foundFilms } = useSearchFilmsQuery(searchText);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -24,8 +28,15 @@ export const SearchFilmsInput = () => {
     navigate(`/${id}`);
   };
 
+  const { email } = useAuth();
+
   const handleSearchClick = (search: string) => {
-    dispatch(setSearch(search));
+    dispatch(
+      setSearch({
+        keywords: search,
+        user: email,
+      }),
+    );
     navigate(`/search?search=${search}`);
   };
 

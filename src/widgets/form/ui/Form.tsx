@@ -7,9 +7,10 @@ import s from './Form.module.css';
 type Props = {
   title: string;
   handleClick: (email: string, password: string) => void;
+  errorMessage?: string;
 };
 
-export const Form = ({ title, handleClick }: Props) => {
+export const Form = ({ title, handleClick, errorMessage }: Props) => {
   const { register, handleSubmit, formState } = useForm({
     resolver: yupResolver(FormSchema),
   });
@@ -37,6 +38,7 @@ export const Form = ({ title, handleClick }: Props) => {
         <button className={s.form_button} type="submit">
           Submit
         </button>
+        <span className={s.error_message}>{errorMessage}</span>
       </form>
     </div>
   );

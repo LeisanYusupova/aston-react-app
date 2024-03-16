@@ -1,12 +1,15 @@
 import { useParams } from 'react-router-dom';
 import { useGetFilmDetailsQuery } from 'src/features/redux/filmsApi/filmsSlice.ts';
+import { LoadingScreen } from 'src/shared/ui/loader';
+import { useAuth } from 'src/shared/hooks/useAuth.ts';
+import PropTypes from 'prop-types';
 import { useFavorites } from 'src/shared/hooks/useFavorites.ts';
 import s from './FilmDetails.module.css';
-import { LoadingScreen } from 'src/shared/ui/loader';
 
 export const FilmDetails = () => {
   const params = useParams();
-  const { data, isLoading, error } = useGetFilmDetailsQuery(params.id || '');
+  const { data, isLoading, error } = useGetFilmDetailsQuery(params.id!);
+  const { isAuth } = useAuth();
 
   const { isFavorite, handleFavoritesClick } = useFavorites(data);
 
@@ -30,14 +33,17 @@ export const FilmDetails = () => {
           <h3>{data.year}</h3>
           <span>{data.description}</span>
           <span>{data.nameOriginal}</span>
-          <button
-            className={s.card_button}
-            onClick={() => handleFavoritesClick()}
-          >
-            {isFavorite ? 'Удалить из избранного' : 'Добавить в избранное'}
-          </button>
+          {isAuth && (
+            <button className={s.card_button} onClick={handleFavoritesClick}>
+              {isFavorite ? 'Удалить из избранного' : 'Добавить в избранное'}
+            </button>
+          )}
         </div>
       </div>
     );
   }
+};
+
+FilmDetails.propTypes = {
+  id: PropTypes.number.isRequired,
 };

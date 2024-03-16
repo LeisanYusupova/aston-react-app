@@ -5,20 +5,25 @@ import {
   addToFavorites,
   removeFromFavorites,
 } from 'src/features/redux/favoriteFilms/favoriteFilmsSlice.ts';
+import { addToFavoritesDb } from 'src/shared/utils/favorites.ts';
 
-export const useFavorites = (film: FilmCardInterface) => {
+export const useFavorites = (film: FilmCardInterface | undefined) => {
   const dispatch = useDispatch();
-  const isFavorite = useSelector((state: RootState) =>
-    state.favorites.films.some((item) => item.id === film.id),
-  );
+  const films = useSelector((state: RootState) => state.favorites.films);
 
-  const handleFavoritesClick = () => {
+  const isFavorite = films.some((item) => item.id === film?.id);
+  console.log({ films, film });
+
+  const handleFavoritesClick = async () => {
+    if (!film) {
+      return;
+    }
     if (isFavorite) {
-      dispatch(removeFromFavorites(film.id));
+      dispatch(removeFromFavorites(film?.id));
     } else {
       dispatch(addToFavorites(film));
+      await addToFavoritesDb(film, 'email');
     }
   };
-
   return { isFavorite, handleFavoritesClick };
 };

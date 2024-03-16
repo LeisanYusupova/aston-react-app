@@ -8,6 +8,17 @@
     align-items: center;
 }
 
+.left_wrapper {
+    display: flex;
+    gap: 60px;
+    align-items: center;
+}
+
+.user_wrapper {
+    display: flex;
+    gap: 8px;
+}
+
 .logo_wrapper {
     display: flex;
     align-items: center;

@@ -16,7 +16,7 @@ export const filmsApi = createApi({
     getFilms: builder.query({
       query: () => 'api/v2.2/films',
       transformResponse: (response: FilmsInterface) => {
-        return response.items.slice(8);
+        return response.items.splice(4, 16);
       },
     }),
     getFilmDetails: builder.query({

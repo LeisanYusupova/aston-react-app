@@ -1,4 +1,5 @@
 import { Form } from 'src/widgets/form';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { setUser } from 'src/features/redux/userProcess/userProcessSlice.ts';
@@ -7,6 +8,7 @@ import { setCurrentUser } from 'src/shared/utils/user.ts';
 
 export const Login = () => {
   const dispatch = useDispatch();
+  const [errorMessage, setErrorMessage] = useState<string>('');
   const navigate = useNavigate();
   const handleLogin = (email: string, password: string) => {
     const auth = getAuth();
@@ -15,14 +17,19 @@ export const Login = () => {
         dispatch(
           setUser({
             email: user.email,
-            id: user.uid,
           }),
         );
         setCurrentUser(user.email!);
         navigate('/');
       })
-      .catch(() => alert('Invalid user'));
+      .catch((error) => setErrorMessage(error.message));
   };
 
-  return <Form title="Авторизация" handleClick={handleLogin} />;
+  return (
+    <Form
+      title="Авторизация"
+      handleClick={handleLogin}
+      errorMessage={errorMessage}
+    />
+  );
 };
