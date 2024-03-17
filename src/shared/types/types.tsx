@@ -50,6 +50,7 @@ export type FilmCardInterface = {
 
 export type FavoritesState = {
   films: FavoriteFilmInterface[];
+  user: string | null;
 };
 
 export type UserProcessState = {

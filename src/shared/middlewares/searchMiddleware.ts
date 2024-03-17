@@ -6,14 +6,20 @@ listenerMiddleware.startListening({
   actionCreator: setSearch,
   effect: async (action) => {
     if (action.payload.user) {
-      const data = localStorage.getItem(action.payload.user);
+      const data = localStorage.getItem(`${action.payload.user}-search`);
       if (data) {
         const storageData = JSON.parse(data);
         storageData.keywords.push(action.payload.keywords);
-        localStorage.setItem(action.payload.user, JSON.stringify(storageData));
+        localStorage.setItem(
+          `${action.payload.user}-search`,
+          JSON.stringify(storageData),
+        );
       } else {
         const newData = { keywords: [action.payload.keywords] };
-        localStorage.setItem(action.payload.user, JSON.stringify(newData));
+        localStorage.setItem(
+          `${action.payload.user}-search`,
+          JSON.stringify(newData),
+        );
       }
     }
   },

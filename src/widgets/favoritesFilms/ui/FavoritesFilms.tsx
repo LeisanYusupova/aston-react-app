@@ -9,7 +9,7 @@ export const FavoritesFilms = () => {
   if (films) {
     return (
       <div className={s.list_wrapper}>
-        {(films!.length > 0 && console.log(films)) ||
+        {films!.length > 0 ? (
           films.map((item: FavoriteFilmInterface) => (
             <FilmCard
               key={item.id}
@@ -19,7 +19,10 @@ export const FavoritesFilms = () => {
               year={item.year}
               image={item.image}
             />
-          ))}
+          ))
+        ) : (
+          <span>Здесь будут отображаться ваши избранные фильмы</span>
+        )}
       </div>
     );
   }

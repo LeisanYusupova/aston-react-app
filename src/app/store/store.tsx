@@ -6,6 +6,7 @@ import favoritesReducer from 'src/features/redux/favoriteFilms/favoriteFilmsSlic
 import searchFilmsReducer from 'src/features/redux/searchFilms/searchFilmsSlice.ts';
 import suggestionsReducer from 'src/features/redux/suggestions/suggestionsSlice.ts';
 import { listenerMiddleware } from 'src/shared/middlewares/searchMiddleware.ts';
+import { listenerMiddlewareFavorites } from 'src/shared/middlewares/favoritesMiddleware.ts';
 
 export const store = configureStore({
   reducer: {
@@ -20,7 +21,10 @@ export const store = configureStore({
     getDefaultMiddleware()
       .concat(filmsApi.middleware)
       .concat(searchApi.middleware)
-      .prepend(listenerMiddleware.middleware),
+      .prepend(
+        listenerMiddleware.middleware,
+        listenerMiddlewareFavorites.middleware,
+      ),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

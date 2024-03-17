@@ -5,8 +5,8 @@ import { useFavorites } from 'src/shared/hooks/useFavorites.ts';
 import s from './FilmCard.module.css';
 
 export const FilmCard = (props: FilmCardInterface) => {
-  const { isAuth } = useAuth();
-  const { isFavorite, handleFavoritesClick } = useFavorites(props);
+  const { isAuth, email } = useAuth();
+  const { isFavorite, handleFavoritesClick } = useFavorites(props, email);
   return (
     <div className={s.card_wrapper}>
       <img src={`${props.image}`} alt="Превью изображение" />

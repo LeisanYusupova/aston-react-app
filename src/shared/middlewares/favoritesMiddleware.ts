@@ -1,19 +1,58 @@
 import { createListenerMiddleware } from '@reduxjs/toolkit';
-import { addToFavorites } from 'src/features/redux/favoriteFilms/favoriteFilmsSlice.ts';
+import {
+  addToFavorites,
+  removeFromFavorites,
+} from 'src/features/redux/favoriteFilms/favoriteFilmsSlice.ts';
+import { FavoriteFilmInterface } from 'src/shared/types/types.tsx';
 
 export const listenerMiddlewareFavorites = createListenerMiddleware();
+
 listenerMiddlewareFavorites.startListening({
   actionCreator: addToFavorites,
   effect: async (action) => {
     if (action.payload.user) {
-      const data = localStorage.getItem(action.payload.user);
+      const data = localStorage.getItem(`${action.payload.user}-favorites`);
       if (data) {
         const storageData = JSON.parse(data);
-        storageData.favorites.push(action.payload.films);
-        localStorage.setItem(action.payload.user, JSON.stringify(storageData));
+        if (storageData.favorites.length > 0) {
+          storageData.favorites.push(action.payload.film);
+          localStorage.setItem(
+            `${action.payload.user}-favorites`,
+            JSON.stringify(storageData),
+          );
+        } else {
+          const newData = { favorites: [action.payload.film] };
+          localStorage.setItem(
+            `${action.payload.user}-favorites`,
+            JSON.stringify(newData),
+          );
+        }
       } else {
-        const newData = { favorites: [action.payload.films] };
-        localStorage.setItem(action.payload.user, JSON.stringify(newData));
+        const newData = { favorites: [action.payload.film] };
+        localStorage.setItem(
+          `${action.payload.user}-favorites`,
+          JSON.stringify(newData),
+        );
+      }
+    }
+  },
+});
+
+listenerMiddlewareFavorites.startListening({
+  actionCreator: removeFromFavorites,
+  effect: async (action) => {
+    if (action.payload.user) {
+      const data = localStorage.getItem(`${action.payload.user}-favorites`);
+      if (data) {
+        const storageData = JSON.parse(data);
+        const filteredData = storageData.favorites.filter(
+          (item: FavoriteFilmInterface) => item.id !== action.payload.id,
+        );
+        storageData.favorites = filteredData;
+        localStorage.setItem(
+          `${action.payload.user}-favorites`,
+          JSON.stringify(storageData),
+        );
       }
     }
   },

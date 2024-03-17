@@ -5,9 +5,11 @@ import {
   addToFavorites,
   removeFromFavorites,
 } from 'src/features/redux/favoriteFilms/favoriteFilmsSlice.ts';
-import { addToFavoritesDb } from 'src/shared/utils/favorites.ts';
 
-export const useFavorites = (film: FilmCardInterface | undefined) => {
+export const useFavorites = (
+  film: FilmCardInterface | undefined,
+  user: string | null,
+) => {
   const dispatch = useDispatch();
   const films = useSelector((state: RootState) => state.favorites.films);
 
@@ -18,11 +20,11 @@ export const useFavorites = (film: FilmCardInterface | undefined) => {
       return;
     }
     if (isFavorite) {
-      dispatch(removeFromFavorites(film?.id));
+      dispatch(removeFromFavorites({ id: film?.id, user }));
     } else {
-      dispatch(addToFavorites(film));
-      await addToFavoritesDb(film, 'email');
+      dispatch(addToFavorites({ film, user }));
     }
   };
+
   return { isFavorite, handleFavoritesClick };
 };
