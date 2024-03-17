@@ -2,7 +2,6 @@ import { useParams } from 'react-router-dom';
 import { useGetFilmDetailsQuery } from 'src/features/redux/filmsApi/filmsSlice.ts';
 import { LoadingScreen } from 'src/shared/ui/loader';
 import { useAuth } from 'src/shared/hooks/useAuth.ts';
-import PropTypes from 'prop-types';
 import { useFavorites } from 'src/shared/hooks/useFavorites.ts';
 import s from './FilmDetails.module.css';
 
@@ -27,11 +26,11 @@ export const FilmDetails = () => {
   if (data) {
     return (
       <div className={s.wrapper}>
-        <img src={data.posterUrl} alt="film poster" />
+        <img src={data.image} width={300} height={500} alt="film poster" />
         <div className={s.container}>
-          <h2>{data.nameRu}</h2>
+          <h2>{data.name}</h2>
           <h3>{data.year}</h3>
-          <span>{data.description}</span>
+          <span className={s.description}>{data.description}</span>
           <span>{data.nameOriginal}</span>
           {isAuth && (
             <button className={s.card_button} onClick={handleFavoritesClick}>
@@ -42,8 +41,4 @@ export const FilmDetails = () => {
       </div>
     );
   }
-};
-
-FilmDetails.propTypes = {
-  id: PropTypes.number.isRequired,
 };

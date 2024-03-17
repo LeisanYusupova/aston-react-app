@@ -1,18 +1,18 @@
 import { createListenerMiddleware } from '@reduxjs/toolkit';
-import { setSearch } from 'src/features/redux/searchFilms/searchFilmsSlice.ts';
+import { addToFavorites } from 'src/features/redux/favoriteFilms/favoriteFilmsSlice.ts';
 
-export const listenerMiddleware = createListenerMiddleware();
-listenerMiddleware.startListening({
-  actionCreator: setSearch,
+export const listenerMiddlewareFavorites = createListenerMiddleware();
+listenerMiddlewareFavorites.startListening({
+  actionCreator: addToFavorites,
   effect: async (action) => {
     if (action.payload.user) {
       const data = localStorage.getItem(action.payload.user);
       if (data) {
         const storageData = JSON.parse(data);
-        storageData.keywords.push(action.payload.keywords);
+        storageData.favorites.push(action.payload.films);
         localStorage.setItem(action.payload.user, JSON.stringify(storageData));
       } else {
-        const newData = { keywords: [action.payload.keywords] };
+        const newData = { favorites: [action.payload.films] };
         localStorage.setItem(action.payload.user, JSON.stringify(newData));
       }
     }

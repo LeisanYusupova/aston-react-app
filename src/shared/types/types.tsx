@@ -44,6 +44,8 @@ export type FilmCardInterface = {
   country: string;
   year: number;
   image: string;
+  nameOriginal?: string;
+  description?: string;
 };
 
 export type FavoritesState = {

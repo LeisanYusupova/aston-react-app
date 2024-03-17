@@ -1,6 +1,28 @@
 import { API_KEY } from 'src/api/API.tsx';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { FilmsInterface } from 'src/shared/types/types.tsx';
+import {
+  FilmDetailInterface,
+  FilmsInterface,
+  FilmCardInterface,
+} from 'src/shared/types/types.tsx';
+
+const convertFilmForUi = ({
+  kinopoiskId,
+  description,
+  nameRu,
+  countries,
+  nameOriginal,
+  year,
+  posterUrlPreview,
+}: FilmDetailInterface): FilmCardInterface => ({
+  id: kinopoiskId,
+  description: description,
+  name: nameRu,
+  nameOriginal: nameOriginal,
+  country: countries![0].country,
+  year,
+  image: posterUrlPreview!,
+});
 
 export const filmsApi = createApi({
   reducerPath: 'filmsApi',
@@ -23,6 +45,9 @@ export const filmsApi = createApi({
       query: (id: string) => ({
         url: `/api/v2.2/films/${id}`,
       }),
+      transformResponse: (response: FilmDetailInterface): FilmCardInterface => {
+        return convertFilmForUi(response);
+      },
     }),
   }),
 });

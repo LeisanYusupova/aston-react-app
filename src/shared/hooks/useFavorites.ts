@@ -12,7 +12,6 @@ export const useFavorites = (film: FilmCardInterface | undefined) => {
   const films = useSelector((state: RootState) => state.favorites.films);
 
   const isFavorite = films.some((item) => item.id === film?.id);
-  console.log({ films, film });
 
   const handleFavoritesClick = async () => {
     if (!film) {
