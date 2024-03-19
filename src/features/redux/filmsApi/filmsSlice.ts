@@ -37,9 +37,9 @@ export const filmsApi = createApi({
   }),
   endpoints: (builder) => ({
     getFilms: builder.query({
-      query: () => 'api/v2.2/films',
+      query: () => 'api/v2.2/films?yearFrom=2024',
       transformResponse: (response: FilmsInterface): FilmInterface[] => {
-        return response.items.splice(4, 16);
+        return response.items.splice(0, 12);
       },
     }),
     getFilmDetails: builder.query({

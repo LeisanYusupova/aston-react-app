@@ -1,8 +1,11 @@
 .link_wrapper {
-    padding-left: 100px;
+    width: 600px;
+    margin:0 auto;
     padding-top: 50px;
     display: flex;
     flex-direction: column;
     gap: 10px;
-    font-size: 20px;
+    font-size: 30px;
+    color: #e874b6;
+
 }

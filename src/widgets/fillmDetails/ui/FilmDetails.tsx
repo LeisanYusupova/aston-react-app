@@ -34,7 +34,7 @@ export const FilmDetails = () => {
           alt="film poster"
         />
         <div className={s.container}>
-          <h2>{data.name}</h2>
+          <h2 className={s.heading}>{data.name}</h2>
           <h3>{data.year}</h3>
           <span className={s.description}>{data.description}</span>
           <span>{data.nameOriginal}</span>

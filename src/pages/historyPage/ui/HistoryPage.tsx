@@ -6,11 +6,15 @@ export const HistoryPage = () => {
   const { keywords } = useSelector((state: RootState) => state.searchFilms);
   return (
     <div className={s.link_wrapper}>
-      {keywords.map((item, index) => (
-        <a key={index} href={`/search?search=${item}`}>
-          {item}
-        </a>
-      ))}
+      {keywords.length > 0 ? (
+        keywords.map((item, index) => (
+          <a key={index} href={`/search?search=${item}`}>
+            {item}
+          </a>
+        ))
+      ) : (
+        <span>Здесь будет отображаться история поиска</span>
+      )}
     </div>
   );
 };

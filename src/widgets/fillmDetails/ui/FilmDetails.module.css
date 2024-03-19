@@ -15,23 +15,29 @@ h2, h3 {
     margin:0;
 }
 
+.heading {
+    color: #e874b6;
+}
+
 .description {
-    height: 400px;
+    height: 300px;
     overflow: scroll;
 }
 .container {
     padding: 20px;
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 15px;
 }
 
 .card_button {
-    padding: 0px;
+    padding: 5px 5px 5px 5px;
     width: 150px;
     height: 50px;
     border: none;
     background-color: #edadd1;
+    color: white;
+    font-weight: bold;
 }
 
 .image {
