@@ -1,5 +1,6 @@
-import { SignUp } from 'src/widgets/signUp/ui/SignUp.tsx';
+import { SignUp } from 'src/features/signUp/ui/SignUp.tsx';
 
-export const RegisterPage = () => {
+const RegisterPage = () => {
   return <SignUp />;
 };
+export default RegisterPage;

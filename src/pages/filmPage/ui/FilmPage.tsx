@@ -1,5 +1,7 @@
 import { FilmDetails } from 'src/widgets/fillmDetails';
 
-export const FilmPage = () => {
+const FilmPage = () => {
   return <FilmDetails />;
 };
+
+export default FilmPage;

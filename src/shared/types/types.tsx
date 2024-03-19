@@ -8,18 +8,18 @@ export type GenresType = {
 
 export interface FilmInterface {
   kinopoiskId: number;
-  imdbId: string;
+  imdbId?: string;
   nameRu: string;
-  nameEn: string;
-  nameOriginal: string;
-  countries: CountriesType[];
-  genres: GenresType[];
-  ratingKinopoisk: number;
-  ratingImdb: number;
+  nameEn?: string;
+  nameOriginal?: string;
+  countries?: CountriesType[];
+  genres?: GenresType[];
+  ratingKinopoisk?: number;
+  ratingImdb?: number;
   year: number;
-  type: string;
-  posterUrl: string;
-  posterUrlPreview: string;
+  type?: string;
+  posterUrl?: string;
+  posterUrlPreview?: string;
 }
 
 export interface FilmsInterface {
@@ -44,10 +44,13 @@ export type FilmCardInterface = {
   country: string;
   year: number;
   image: string;
+  nameOriginal?: string;
+  description?: string;
 };
 
 export type FavoritesState = {
   films: FavoriteFilmInterface[];
+  user: string | null;
 };
 
 export type UserProcessState = {
@@ -57,6 +60,7 @@ export type UserProcessState = {
 
 export type SearchFilmsState = {
   keywords: string[];
+  user: string | null;
 };
 
 export interface FilmDetailInterface {

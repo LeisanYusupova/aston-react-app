@@ -1,23 +1,31 @@
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from 'src/shared/hooks/useAuth.ts';
-import { removeUser } from 'src/features/userProcess/userProcessSlice.ts';
-import { useTheme } from 'src/app/context/ThemeContext.tsx';
-import { SearchFilmsInput } from 'src/widgets/searchFilmsInput/ui/SearchFilmsInput.tsx';
+import { useAuth } from 'src/shared/hooks/useAuth';
+import { useStoredState } from 'src/shared/hooks/useStoredState.ts';
+import { removeUser } from 'src/features/redux/userProcess/userProcessSlice';
+import { useTheme } from 'src/app/context/ThemeContext';
+import { SearchFilmsInput } from 'src/widgets/searchFilmsInput/ui/SearchFilmsInput';
 import { useDispatch } from 'react-redux';
-import logo from '../../../assets/icon-film.png';
-import sunIcon from '../../../assets/icons_sun.png';
-import moonIcon from '../../../assets/icons_moon.png';
+import { setCurrentUser } from 'src/shared/utils/user.ts';
+import { removeSearch } from 'src/features/redux/searchFilms/searchFilmsSlice.ts';
+import { clearAllFavorites } from 'src/features/redux/favoriteFilms/favoriteFilmsSlice.ts';
+import logo from 'src/assets/icon-film.png';
+import sunIcon from 'src/assets/icons_sun.png';
+import moonIcon from 'src/assets/icons_moon.png';
 import s from './Header.module.css';
 
 export const Header = () => {
+  useStoredState();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { isDark, toggleTheme } = useTheme();
   const { isAuth, email } = useAuth();
 
   const handleLogOut = () => {
+    setCurrentUser('');
     dispatch(removeUser());
+    dispatch(removeSearch());
+    dispatch(clearAllFavorites());
   };
   const handleHistoryClick = () => {
     navigate('/history');
@@ -25,36 +33,42 @@ export const Header = () => {
 
   return (
     <div className={`${s.header_wrapper} ${isDark ? s['dark'] : s['light']}`}>
-      <Link className={s.logo_wrapper} to="/">
-        <img src={logo} width={60} height={60} alt="Логотип" />
-      </Link>
-      {isDark ? (
-        <img
-          className={s.theme_toggle_wrapper}
-          onClick={toggleTheme}
-          src={moonIcon}
-          width={50}
-          height={50}
-          alt="Moon Icon"
-        />
-      ) : (
-        <img
-          onClick={toggleTheme}
-          src={sunIcon}
-          width={50}
-          height={50}
-          alt="Sun icon"
-        />
+      <div className={s.left_wrapper}>
+        <Link className={s.logo_wrapper} to="/">
+          <img src={logo} width={60} height={60} alt="Логотип" />
+        </Link>
+        {isDark ? (
+          <img
+            className={s.theme_toggle_wrapper}
+            onClick={toggleTheme}
+            src={moonIcon}
+            width={50}
+            height={50}
+            alt="Moon Icon"
+          />
+        ) : (
+          <img
+            onClick={toggleTheme}
+            src={sunIcon}
+            width={50}
+            height={50}
+            alt="Sun icon"
+          />
+        )}
+      </div>
+      {isAuth && (
+        <div className={s.user_wrapper}>
+          <Link to="/favorites">
+            <button>Избранное</button>
+          </Link>
+          <SearchFilmsInput />
+          <button onClick={handleHistoryClick}>История поиска</button>
+        </div>
       )}
-      <Link to="/favorites">
-        <button>Избранное</button>
-      </Link>
-      <SearchFilmsInput />
-      <button onClick={handleHistoryClick}>История поиска</button>
       <div className={s.button_wrapper}>
         {isAuth ? (
-          <div>
-            <span>{email}</span>
+          <div className={s.button_wrapper}>
+            <span className={s.user_name}>{email}</span>
             <button onClick={handleLogOut}>Выйти</button>
           </div>
         ) : (

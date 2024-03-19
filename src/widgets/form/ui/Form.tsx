@@ -1,4 +1,5 @@
 import { Input } from 'src/shared/ui/input/Input.tsx';
+import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FormSchema } from 'src/shared/lib/yup/yup.ts';
@@ -7,9 +8,10 @@ import s from './Form.module.css';
 type Props = {
   title: string;
   handleClick: (email: string, password: string) => void;
+  errorMessage?: string;
 };
 
-export const Form = ({ title, handleClick }: Props) => {
+export const Form = ({ title, handleClick, errorMessage }: Props) => {
   const { register, handleSubmit, formState } = useForm({
     resolver: yupResolver(FormSchema),
   });
@@ -35,8 +37,22 @@ export const Form = ({ title, handleClick }: Props) => {
           error={errors?.password?.message}
         />
         <button className={s.form_button} type="submit">
-          Submit
+          {title === 'Авторизация' ? 'Войти' : 'Зарегистирироваться'}
         </button>
+        <span className={s.error_message}>{errorMessage}</span>
+        <div className={s.links}>
+          {title === 'Авторизация' ? (
+            <div>
+              <div>Ещё нет аккаунта?</div>
+              <Link to="/signup">Зарегистрируйтесь</Link>
+            </div>
+          ) : (
+            <div>
+              <div>Уже есть аккаунт</div>
+              <Link to="/signin">Войти</Link>
+            </div>
+          )}
+        </div>
       </form>
     </div>
   );

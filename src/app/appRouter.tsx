@@ -1,13 +1,21 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { AppRoute } from 'src/shared/types/types.tsx';
-import { LoginPage } from 'src/pages/loginPage';
-import { FavoritesPage } from 'src/pages/favoritesPage';
-import { RegisterPage } from 'src/pages/registerPage';
-import { FilmPage } from 'src/pages/filmPage';
+import { lazy, Suspense } from 'react';
 import { FilmsPage } from 'src/pages/filmsPage/ui';
 import { MainLayout } from 'src/shared/ui/templates/MainLayout.tsx';
-import { SearchPage } from 'src/pages/searchPage';
 import { HistoryPage } from 'src/pages/historyPage/ui/HistoryPage.tsx';
+import { SearchPage } from 'src/pages/searchPage';
+import { LoadingScreen } from 'src/shared/ui/loader';
+import { PrivateRoute } from 'src/app/privateRoute/PrivateRoute.tsx';
+
+export const LoginPage = lazy(() => import('../pages/loginPage/ui/LoginPage'));
+export const FavoritesPage = lazy(
+  () => import('src/pages/favoritesPage/ui/FavoritesPage'),
+);
+export const RegisterPage = lazy(
+  () => import('src/pages/registerPage/ui/RegisterPage'),
+);
+export const FilmPage = lazy(() => import('src/pages/filmPage/ui/FilmPage'));
 
 export const createRouter = () => {
   return createBrowserRouter([
@@ -20,30 +28,52 @@ export const createRouter = () => {
           element: <FilmsPage />,
         },
         {
-          path: AppRoute.Search,
-          element: <SearchPage />,
-        },
-        {
           path: AppRoute.History,
-          element: <HistoryPage />,
+          element: (
+            <PrivateRoute>
+              <HistoryPage />
+            </PrivateRoute>
+          ),
         },
         {
           path: AppRoute.Signin,
-          element: <LoginPage />,
+          element: (
+            <Suspense fallback={<LoadingScreen />}>
+              <LoginPage />
+            </Suspense>
+          ),
         },
         {
           path: AppRoute.Favorites,
-          element: <FavoritesPage />,
+          element: (
+            <PrivateRoute>
+              <Suspense fallback={<LoadingScreen />}>
+                <FavoritesPage />
+              </Suspense>
+            </PrivateRoute>
+          ),
         },
         {
           path: AppRoute.Signup,
-          element: <RegisterPage />,
+          element: (
+            <Suspense fallback={<LoadingScreen />}>
+              <RegisterPage />
+            </Suspense>
+          ),
+        },
+        {
+          path: AppRoute.Search,
+          element: <SearchPage />,
         },
         {
           children: [
             {
               path: AppRoute.Id,
-              element: <FilmPage />,
+              element: (
+                <Suspense fallback={<LoadingScreen />}>
+                  <FilmPage />
+                </Suspense>
+              ),
             },
           ],
         },

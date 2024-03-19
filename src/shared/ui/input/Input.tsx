@@ -19,7 +19,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(
           ref={ref}
           {...rest}
           className={s.input}
-          type="text"
+          type={label === 'Пароль' ? 'password' : 'text'}
           id={labelId}
         />
         {error && <span className={s.errorMessage}>{error}</span>}

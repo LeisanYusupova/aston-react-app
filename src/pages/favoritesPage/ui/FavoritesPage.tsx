@@ -1,4 +1,6 @@
 import { FavoritesFilms } from 'src/widgets/favoritesFilms/ui/FavoritesFilms.tsx';
-export const FavoritesPage = () => {
+const FavoritesPage = () => {
   return <FavoritesFilms />;
 };
+
+export default FavoritesPage;

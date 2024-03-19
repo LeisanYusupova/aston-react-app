@@ -1,30 +1,23 @@
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 import { FilmCardInterface } from 'src/shared/types/types.tsx';
-import { RootState } from 'src/app/store/store.tsx';
-import {
-  addToFavorites,
-  removeFromFavorites,
-} from 'src/features/favoriteFilms/favoriteFilmsSlice.ts';
+import { useAuth } from 'src/shared/hooks/useAuth.ts';
+import { useFavorites } from 'src/shared/hooks/useFavorites.ts';
+import PropTypes from 'prop-types';
 import s from './FilmCard.module.css';
 
 export const FilmCard = (props: FilmCardInterface) => {
-  const dispatch = useDispatch();
-  const isFavorite = useSelector((state: RootState) =>
-    state.favorites.films.some((item) => item.id === props.id),
-  );
-  const handleFavoritesClick = (props: FilmCardInterface) => {
-    if (isFavorite) {
-      dispatch(removeFromFavorites(props.id));
-    } else {
-      dispatch(addToFavorites(props));
-    }
-  };
+  const { isAuth, email } = useAuth();
+  const { isFavorite, handleFavoritesClick } = useFavorites(props.id, email);
   return (
     <div className={s.card_wrapper}>
-      <img src={`${props.image}`} alt="Превью изображение" />
+      <img
+        className={s.card_image}
+        src={`${props.image}`}
+        height={200}
+        alt="Превью изображение"
+      />
       <div className={s.card_container}>
-        <span>{props.name}</span>
+        <span className={s.card_heading}>{props.name}</span>
         <span>{props.country}</span>
         <span>{props.year}</span>
 
@@ -32,14 +25,23 @@ export const FilmCard = (props: FilmCardInterface) => {
           <Link to={`/${props.id}`}>
             <button className={s.card_button}>Подробнее</button>
           </Link>
-          <button
-            className={s.card_button}
-            onClick={() => handleFavoritesClick(props)}
-          >
-            {isFavorite ? 'Удалить из избранного' : 'Добавить в избранное'}
-          </button>
+          {isAuth && (
+            <button className={s.card_button} onClick={handleFavoritesClick}>
+              {isFavorite ? 'Удалить из избранного' : 'Добавить в избранное'}
+            </button>
+          )}
         </div>
       </div>
     </div>
   );
+};
+
+FilmCard.propTypes = {
+  id: PropTypes.number.isRequired,
+  name: PropTypes.string,
+  country: PropTypes.string.isRequired,
+  year: PropTypes.number,
+  image: PropTypes.string.isRequired,
+  nameOriginal: PropTypes.string,
+  description: PropTypes.string,
 };

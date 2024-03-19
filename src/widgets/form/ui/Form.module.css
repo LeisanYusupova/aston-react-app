@@ -19,4 +19,11 @@
     width: 200px;
     background-color: #edadd1;
     margin: 0 auto;
+    color: white;
+    display: flex;
+    justify-content: center;
+}
+
+.error_message {
+    color: red;
 }

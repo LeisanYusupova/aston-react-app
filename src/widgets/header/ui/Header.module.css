@@ -8,6 +8,22 @@
     align-items: center;
 }
 
+.left_wrapper {
+    display: flex;
+    gap: 60px;
+    align-items: center;
+}
+
+.user_wrapper {
+    display: flex;
+    gap: 40px;
+}
+.user_name {
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+}
+
 .logo_wrapper {
     display: flex;
     align-items: center;
