@@ -1,7 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { FavoritesState } from 'src/shared/types/types.tsx';
 
-const initialState: FavoritesState = {
+export type InitialState = {
+  films: number[];
+  user: string | null;
+};
+
+const initialState: InitialState = {
   films: [],
   user: null,
 };
@@ -19,9 +23,8 @@ export const favoriteFilms = createSlice({
       state.user = action.payload.user;
     },
     removeFromFavorites: (state, action) => {
-      const { id, user } = action.payload;
-      state.films = state.films.filter((obj) => obj.id !== id);
-      state.user = user;
+      state.films = state.films.filter((obj) => obj !== action.payload.film);
+      state.user = action.payload.user;
     },
     clearAllFavorites: (state) => {
       state.films = [];

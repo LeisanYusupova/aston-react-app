@@ -2,26 +2,21 @@ import { useParams } from 'react-router-dom';
 import { useGetFilmDetailsQuery } from 'src/features/redux/filmsApi/filmsSlice.ts';
 import { LoadingScreen } from 'src/shared/ui/loader';
 import { useAuth } from 'src/shared/hooks/useAuth.ts';
-import { useFavorites } from 'src/shared/hooks/useFavorites.ts';
+import { useFavoritesDetail } from 'src/shared/hooks/useFavorites.ts';
 import s from './FilmDetails.module.css';
 
 export const FilmDetails = () => {
   const params = useParams();
   const { isAuth, email } = useAuth();
   const { data, isLoading, error } = useGetFilmDetailsQuery(params.id!);
-
-  const { isFavorite, handleFavoritesClick } = useFavorites(data, email);
+  const { isFavorite, handleFavoritesClick } = useFavoritesDetail(data, email);
 
   if (isLoading) {
-    return (
-      <p>
-        <LoadingScreen />
-      </p>
-    );
+    return <LoadingScreen />;
   }
 
   if (error) {
-    return <p>Error</p>;
+    return <span>Error</span>;
   }
   if (data) {
     return (

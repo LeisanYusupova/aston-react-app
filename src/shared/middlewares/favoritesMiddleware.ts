@@ -3,7 +3,6 @@ import {
   addToFavorites,
   removeFromFavorites,
 } from 'src/features/redux/favoriteFilms/favoriteFilmsSlice.ts';
-import { FavoriteFilmInterface } from 'src/shared/types/types.tsx';
 
 export const listenerMiddlewareFavorites = createListenerMiddleware();
 
@@ -45,10 +44,9 @@ listenerMiddlewareFavorites.startListening({
       const data = localStorage.getItem(`${action.payload.user}-favorites`);
       if (data) {
         const storageData = JSON.parse(data);
-        const filteredData: FavoriteFilmInterface[] =
-          storageData.favorites.filter(
-            (item: FavoriteFilmInterface) => item.id !== action.payload.id,
-          );
+        const filteredData: number[] = storageData.favorites.filter(
+          (item: number) => item !== action.payload.film,
+        );
         storageData.favorites = filteredData;
         localStorage.setItem(
           `${action.payload.user}-favorites`,

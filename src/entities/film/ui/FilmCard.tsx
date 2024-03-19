@@ -7,7 +7,7 @@ import s from './FilmCard.module.css';
 
 export const FilmCard = (props: FilmCardInterface) => {
   const { isAuth, email } = useAuth();
-  const { isFavorite, handleFavoritesClick } = useFavorites(props, email);
+  const { isFavorite, handleFavoritesClick } = useFavorites(props.id, email);
   return (
     <div className={s.card_wrapper}>
       <img
@@ -40,7 +40,7 @@ FilmCard.propTypes = {
   id: PropTypes.number.isRequired,
   name: PropTypes.string,
   country: PropTypes.string.isRequired,
-  year: PropTypes.number.isRequired,
+  year: PropTypes.number,
   image: PropTypes.string.isRequired,
   nameOriginal: PropTypes.string,
   description: PropTypes.string,
