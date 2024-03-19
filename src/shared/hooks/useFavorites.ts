@@ -17,10 +17,8 @@ export const useFavorites = (film: number | undefined, user: string | null) => {
       return;
     }
     if (isFavorite) {
-      console.log(film);
       dispatch(removeFromFavorites({ film, user }));
     } else {
-      console.log(film);
       dispatch(addToFavorites({ film, user }));
     }
   };
