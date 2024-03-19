@@ -4,6 +4,7 @@ import {
   FilmDetailInterface,
   FilmsInterface,
   FilmCardInterface,
+  FilmInterface,
 } from 'src/shared/types/types.tsx';
 
 const convertFilmForUi = ({
@@ -37,7 +38,7 @@ export const filmsApi = createApi({
   endpoints: (builder) => ({
     getFilms: builder.query({
       query: () => 'api/v2.2/films',
-      transformResponse: (response: FilmsInterface) => {
+      transformResponse: (response: FilmsInterface): FilmInterface[] => {
         return response.items.splice(4, 16);
       },
     }),

@@ -1,8 +1,22 @@
 
 .search_input {
     height: 40px;
-    border-radius: 8px;
-    border: 1px solid grey;
     padding: 0 10px;
+    border: none;
     background-color: white;
+    border-radius: 8px;
+    position: relative;
+
+}
+
+.search_wrapper {
+    height: 40px;
+}
+
+
+
+.search_button {
+    border-radius: 8px;
+    height: 40px;
+    border:none;
 }

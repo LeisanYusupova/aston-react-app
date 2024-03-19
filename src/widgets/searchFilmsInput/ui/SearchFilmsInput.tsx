@@ -44,6 +44,12 @@ export const SearchFilmsInput = () => {
 
   const onBlurHandler = () =>
     setTimeout(() => setIsOpenSuggestions(false), 200);
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      setIsOpenSuggestions(false);
+      handleSearchClick(keyword);
+    }
+  };
 
   return (
     <div className={s.search_wrapper}>
@@ -54,6 +60,7 @@ export const SearchFilmsInput = () => {
         onChange={(event) => {
           handleInputChange(event);
         }}
+        onKeyDown={handleKeyPress}
         onFocus={onFocusHandler}
         onBlur={onBlurHandler}
       ></input>

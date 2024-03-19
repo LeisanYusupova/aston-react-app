@@ -1,17 +1,16 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getAuthorizeCheckedSelector, getUserSelector } from '../../store';
+import { useAuth } from 'src/shared/hooks/useAuth.ts';
 
 export const PrivateRoute = ({ children }: { children: React.ReactNode }) => {
-  const user = useAppSelector(getUserSelector)!;
-  const authorizeChecked = useAppSelector(getAuthorizeCheckedSelector);
+  const { isAuth } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!user?.email && authorizeChecked) {
+    if (!isAuth) {
       navigate('/signin');
     }
-  }, [user, navigate, authorizeChecked]);
+  }, [isAuth, navigate]);
 
-  return authorizeChecked && <>{children}</>;
+  return isAuth && <>{children}</>;
 };

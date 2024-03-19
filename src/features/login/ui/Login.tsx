@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { setUser } from 'src/features/redux/userProcess/userProcessSlice.ts';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { setCurrentUser } from 'src/shared/utils/user.ts';
+import { useStoredState } from 'src/shared/hooks/useStoredState.ts';
 
 export const Login = () => {
   const dispatch = useDispatch();
@@ -21,6 +22,7 @@ export const Login = () => {
         );
         setCurrentUser(user.email!);
         navigate('/');
+        useStoredState();
       })
       .catch((error) => setErrorMessage(error.message));
   };

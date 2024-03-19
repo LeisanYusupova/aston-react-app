@@ -9,9 +9,13 @@ export const FilmCard = (props: FilmCardInterface) => {
   const { isFavorite, handleFavoritesClick } = useFavorites(props, email);
   return (
     <div className={s.card_wrapper}>
-      <img src={`${props.image}`} alt="Превью изображение" />
+      <img
+        className={s.card_image}
+        src={`${props.image}`}
+        alt="Превью изображение"
+      />
       <div className={s.card_container}>
-        <span>{props.name}</span>
+        <span className={s.card_heading}>{props.name}</span>
         <span>{props.country}</span>
         <span>{props.year}</span>
 

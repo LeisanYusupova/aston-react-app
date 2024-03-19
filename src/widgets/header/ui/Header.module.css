@@ -16,7 +16,11 @@
 
 .user_wrapper {
     display: flex;
-    gap: 8px;
+    gap: 40px;
+}
+.user_name {
+    font-size: 20px;
+    font-weight: bold;
 }
 
 .logo_wrapper {

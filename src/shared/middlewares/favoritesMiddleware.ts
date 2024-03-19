@@ -45,9 +45,10 @@ listenerMiddlewareFavorites.startListening({
       const data = localStorage.getItem(`${action.payload.user}-favorites`);
       if (data) {
         const storageData = JSON.parse(data);
-        const filteredData = storageData.favorites.filter(
-          (item: FavoriteFilmInterface) => item.id !== action.payload.id,
-        );
+        const filteredData: FavoriteFilmInterface[] =
+          storageData.favorites.filter(
+            (item: FavoriteFilmInterface) => item.id !== action.payload.id,
+          );
         storageData.favorites = filteredData;
         localStorage.setItem(
           `${action.payload.user}-favorites`,

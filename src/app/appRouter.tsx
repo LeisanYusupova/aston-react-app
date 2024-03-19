@@ -6,6 +6,7 @@ import { MainLayout } from 'src/shared/ui/templates/MainLayout.tsx';
 import { HistoryPage } from 'src/pages/historyPage/ui/HistoryPage.tsx';
 import { SearchPage } from 'src/pages/searchPage';
 import { LoadingScreen } from 'src/shared/ui/loader';
+import { PrivateRoute } from 'src/app/privateRoute/PrivateRoute.tsx';
 
 export const LoginPage = lazy(() => import('../pages/loginPage/ui/LoginPage'));
 export const FavoritesPage = lazy(
@@ -28,7 +29,11 @@ export const createRouter = () => {
         },
         {
           path: AppRoute.History,
-          element: <HistoryPage />,
+          element: (
+            <PrivateRoute>
+              <HistoryPage />
+            </PrivateRoute>
+          ),
         },
         {
           path: AppRoute.Signin,
@@ -41,9 +46,11 @@ export const createRouter = () => {
         {
           path: AppRoute.Favorites,
           element: (
-            <Suspense fallback={<LoadingScreen />}>
-              <FavoritesPage />
-            </Suspense>
+            <PrivateRoute>
+              <Suspense fallback={<LoadingScreen />}>
+                <FavoritesPage />
+              </Suspense>
+            </PrivateRoute>
           ),
         },
         {

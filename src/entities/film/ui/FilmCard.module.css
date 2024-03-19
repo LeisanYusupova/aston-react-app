@@ -1,5 +1,18 @@
+
+
+.card_heading {
+    color: #e874b6;
+    font-weight: 800;
+}
+
+.card_image {
+    border-radius: 8px;
+}
+
+
 .card_wrapper {
     display: flex;
+    border-radius: 8px;
     flex-direction: row;
     gap: 40px;
     width : 500px;

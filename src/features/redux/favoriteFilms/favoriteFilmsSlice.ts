@@ -14,14 +14,27 @@ export const favoriteFilms = createSlice({
       state.films.push(action.payload.film);
       state.user = action.payload.user;
     },
+    setFavoritesFromState: (state, action) => {
+      state.films = action.payload.films;
+      state.user = action.payload.user;
+    },
     removeFromFavorites: (state, action) => {
       const { id, user } = action.payload;
       state.films = state.films.filter((obj) => obj.id !== id);
       state.user = user;
     },
+    clearAllFavorites: (state) => {
+      state.films = [];
+      state.user = null;
+    },
   },
 });
 
-export const { addToFavorites, removeFromFavorites } = favoriteFilms.actions;
+export const {
+  addToFavorites,
+  setFavoritesFromState,
+  removeFromFavorites,
+  clearAllFavorites,
+} = favoriteFilms.actions;
 
 export default favoriteFilms.reducer;

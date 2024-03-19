@@ -1,8 +1,9 @@
-export const getItems = (user: string) => {
-  const items = localStorage.getItem(`favorites-${user}`);
-  return items ? JSON.parse(items) : [];
+export const getFavoriteItems = (user: string) => {
+  const items = localStorage.getItem(`${user}-favorites`);
+  return items ? JSON.parse(items) : null;
 };
 
-export const setItems = (user: string, items): void => {
-  localStorage.setItem(`favorites-${user}`, JSON.stringify(items));
+export const getSearchItems = (user: string) => {
+  const items = localStorage.getItem(`${user}-search`);
+  return items ? JSON.parse(items) : null;
 };

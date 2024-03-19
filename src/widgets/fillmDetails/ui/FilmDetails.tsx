@@ -7,10 +7,10 @@ import s from './FilmDetails.module.css';
 
 export const FilmDetails = () => {
   const params = useParams();
+  const { isAuth, email } = useAuth();
   const { data, isLoading, error } = useGetFilmDetailsQuery(params.id!);
-  const { isAuth } = useAuth();
 
-  const { isFavorite, handleFavoritesClick } = useFavorites(data);
+  const { isFavorite, handleFavoritesClick } = useFavorites(data, email);
 
   if (isLoading) {
     return (
@@ -26,7 +26,13 @@ export const FilmDetails = () => {
   if (data) {
     return (
       <div className={s.wrapper}>
-        <img src={data.image} width={300} height={500} alt="film poster" />
+        <img
+          className={s.image}
+          src={data.image}
+          width={300}
+          height={500}
+          alt="film poster"
+        />
         <div className={s.container}>
           <h2>{data.name}</h2>
           <h3>{data.year}</h3>
