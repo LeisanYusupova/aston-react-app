@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from 'src/shared/hooks/useAuth';
-import { useStoredState } from 'src/shared/hooks/useStoredState.ts';
 import { removeUser } from 'src/features/redux/userProcess/userProcessSlice';
 import { useTheme } from 'src/app/context/ThemeContext';
 import { SearchFilmsInput } from 'src/widgets/searchFilmsInput/ui/SearchFilmsInput';
@@ -15,7 +14,6 @@ import moonIcon from 'src/assets/icons_moon.png';
 import s from './Header.module.css';
 
 export const Header = () => {
-  useStoredState();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { isDark, toggleTheme } = useTheme();

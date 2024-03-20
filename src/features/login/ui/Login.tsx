@@ -1,30 +1,28 @@
 import { Form } from 'src/widgets/form';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { setUser } from 'src/features/redux/userProcess/userProcessSlice.ts';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { setCurrentUser } from 'src/shared/utils/user.ts';
-import { useStoredState } from 'src/shared/hooks/useStoredState.ts';
+import { loginUserInFirebase } from 'src/shared/utils/firebase.ts';
 
 export const Login = () => {
-  const dispatch = useDispatch();
   const [errorMessage, setErrorMessage] = useState<string>('');
   const navigate = useNavigate();
   const handleLogin = (email: string, password: string) => {
-    const auth = getAuth();
-    signInWithEmailAndPassword(auth, email, password)
-      .then(({ user }) => {
-        dispatch(
-          setUser({
-            email: user.email,
-          }),
-        );
-        setCurrentUser(user.email!);
+    loginUserInFirebase({
+      data: { email: email, password: password },
+      successHandler: (userCredential) => {
+        const user = userCredential.user!;
+        const userData = { email: user.email! };
+        setCurrentUser(userData.email);
         navigate('/');
-        useStoredState();
-      })
-      .catch((error) => setErrorMessage(error.message));
+      },
+      errorHandler: (error) => {
+        setErrorMessage(error.message);
+      },
+    });
+  };
+  const handleInputChange = () => {
+    setErrorMessage('');
   };
 
   return (
@@ -32,6 +30,7 @@ export const Login = () => {
       title="Авторизация"
       handleClick={handleLogin}
       errorMessage={errorMessage}
+      handleInputChange={handleInputChange}
     />
   );
 };

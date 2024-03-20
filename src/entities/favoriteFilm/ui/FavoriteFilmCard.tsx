@@ -1,4 +1,5 @@
 import { useGetFilmDetailsQuery } from 'src/features/redux/filmsApi/filmsSlice.ts';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { useFavoritesDetail } from 'src/shared/hooks/useFavorites.ts';
 import { useAuth } from 'src/shared/hooks/useAuth.ts';
@@ -47,4 +48,8 @@ export const FavoriteFilmCard = ({ id }: Props) => {
       </div>
     );
   }
+};
+
+FavoriteFilmCard.propTypes = {
+  id: PropTypes.number.isRequired,
 };

@@ -6,6 +6,13 @@
     flex-wrap: wrap;
     justify-content: center;
 }
+.heading {
+    color: #e874b6;
+    width: 300px;
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
 
 .info_message {
     width: 800px;

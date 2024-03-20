@@ -30,7 +30,7 @@ export const SearchPage = () => {
               key={item.filmId}
               id={item.filmId}
               name={item.nameRu}
-              country={item.countries[0].country}
+              country={item.countries[0]?.country}
               year={item.year}
               image={item.posterUrlPreview}
             />

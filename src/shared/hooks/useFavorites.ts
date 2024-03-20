@@ -1,5 +1,6 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from 'src/app/store/store.tsx';
+import { useDispatch } from 'react-redux';
+import { useAppSelector } from 'src/shared/hooks/hook.ts';
+import { getFavoriteFilmsSelector } from 'src/features/redux/favoriteFilms/selectors.ts';
 import {
   addToFavorites,
   removeFromFavorites,
@@ -8,8 +9,7 @@ import { FilmCardInterface } from 'src/shared/types/types.tsx';
 
 export const useFavorites = (film: number | undefined, user: string | null) => {
   const dispatch = useDispatch();
-  const films = useSelector((state: RootState) => state.favorites.films);
-
+  const films = useAppSelector(getFavoriteFilmsSelector);
   const isFavorite = films.some((item) => item === film);
 
   const handleFavoritesClick = async () => {
@@ -31,7 +31,7 @@ export const useFavoritesDetail = (
   user: string | null,
 ) => {
   const dispatch = useDispatch();
-  const films = useSelector((state: RootState) => state.favorites.films);
+  const films = useAppSelector(getFavoriteFilmsSelector);
   const isFavorite = films.some((item) => film && item === film!.id);
 
   const handleFavoritesClick = async () => {
