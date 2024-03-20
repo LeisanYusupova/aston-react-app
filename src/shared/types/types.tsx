@@ -55,7 +55,7 @@ export type FavoritesState = {
 
 export type UserProcessState = {
   email: string | null;
-  id: string | null;
+  id: string;
 };
 
 export type SearchFilmsState = {

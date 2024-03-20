@@ -25,14 +25,14 @@ export const FilmDetails = () => {
           className={s.image}
           src={data.image}
           width={300}
-          height={500}
+          height={400}
           alt="film poster"
         />
         <div className={s.container}>
           <h2 className={s.heading}>{data.name}</h2>
           <h3>{data.year}</h3>
           <span className={s.description}>{data.description}</span>
-          <span>{data.nameOriginal}</span>
+          <span className={s.heading}>{data.nameOriginal}</span>
           {isAuth && (
             <button className={s.card_button} onClick={handleFavoritesClick}>
               {isFavorite ? 'Удалить из избранного' : 'Добавить в избранное'}

@@ -1,34 +1,35 @@
 import { Form } from 'src/widgets/form';
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { setUser } from 'src/features/redux/userProcess/userProcessSlice.ts';
 import { setCurrentUser } from 'src/shared/utils/user.ts';
 import { useState } from 'react';
+import { regUserInFirebase } from 'src/shared/utils/firebase.ts';
 
 export const SignUp = () => {
-  const dispatch = useDispatch();
   const [errorMessage, setErrorMessage] = useState<string>('');
   const navigate = useNavigate();
   const handleRegister = (email: string, password: string) => {
-    const auth = getAuth();
-    createUserWithEmailAndPassword(auth, email, password)
-      .then(({ user }) => {
-        dispatch(
-          setUser({
-            email: user.email,
-          }),
-        );
-        setCurrentUser(user.email!);
+    regUserInFirebase({
+      data: { email: email, password: password },
+      successHandler: (userCredential) => {
+        const user = userCredential.user!;
+        const userData = { email: user.email! };
+        setCurrentUser(userData.email);
         navigate('/');
-      })
-      .catch((error) => setErrorMessage(error.message));
+      },
+      errorHandler: () => {
+        setErrorMessage('Аккаунт с таким именем уже существует');
+      },
+    });
+  };
+  const handleInputChange = () => {
+    setErrorMessage('');
   };
   return (
     <Form
       title="Регистрация"
       handleClick={handleRegister}
       errorMessage={errorMessage}
+      handleInputChange={handleInputChange}
     />
   );
 };

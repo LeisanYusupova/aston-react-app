@@ -9,9 +9,15 @@ type Props = {
   title: string;
   handleClick: (email: string, password: string) => void;
   errorMessage?: string;
+  handleInputChange: () => void;
 };
 
-export const Form = ({ title, handleClick, errorMessage }: Props) => {
+export const Form = ({
+  title,
+  handleClick,
+  errorMessage,
+  handleInputChange,
+}: Props) => {
   const { register, handleSubmit, formState } = useForm({
     resolver: yupResolver(FormSchema),
   });
@@ -30,11 +36,13 @@ export const Form = ({ title, handleClick, errorMessage }: Props) => {
           label={'Логин'}
           {...register('email')}
           error={errors?.email?.message}
+          onChange={handleInputChange}
         ></Input>
         <Input
           label={'Пароль'}
           {...register('password')}
           error={errors?.password?.message}
+          onChange={handleInputChange}
         />
         <button className={s.form_button} type="submit">
           {title === 'Авторизация' ? 'Войти' : 'Зарегистирироваться'}

@@ -5,7 +5,6 @@ import s from './FavoritesFilms.module.css';
 
 export const FavoritesFilms = () => {
   const filmIds = useAppSelector(getFavoriteFilmsSelector);
-
   if (filmIds.length === 0) {
     return (
       <div className={s.info_message}>
@@ -14,10 +13,13 @@ export const FavoritesFilms = () => {
     );
   } else {
     return (
-      <div className={s.list_wrapper}>
-        {filmIds.map((item) => (
-          <FavoriteFilmCard id={item} key={item} />
-        ))}
+      <div>
+        <h2 className={s.heading}>Избранные фильмы</h2>
+        <div className={s.list_wrapper}>
+          {filmIds.map((item) => (
+            <FavoriteFilmCard id={item} key={item} />
+          ))}
+        </div>
       </div>
     );
   }
