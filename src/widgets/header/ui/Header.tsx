@@ -6,7 +6,10 @@ import { useTheme } from 'src/app/context/ThemeContext';
 import { SearchFilmsInput } from 'src/widgets/searchFilmsInput/ui/SearchFilmsInput';
 import { useDispatch } from 'react-redux';
 import { setCurrentUser } from 'src/shared/utils/user.ts';
-import { removeSearch } from 'src/features/redux/searchFilms/searchFilmsSlice.ts';
+import {
+  removeSearch,
+  setCurrentSearch,
+} from 'src/features/redux/searchFilms/searchFilmsSlice.ts';
 import { clearAllFavorites } from 'src/features/redux/favoriteFilms/favoriteFilmsSlice.ts';
 import logo from 'src/assets/icon-film.png';
 import sunIcon from 'src/assets/icons_sun.png';
@@ -24,6 +27,7 @@ export const Header = () => {
     dispatch(removeUser());
     dispatch(removeSearch());
     dispatch(clearAllFavorites());
+    dispatch(setCurrentSearch(''));
   };
   const handleHistoryClick = () => {
     navigate('/history');
