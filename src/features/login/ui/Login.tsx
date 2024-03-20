@@ -16,8 +16,8 @@ export const Login = () => {
         setCurrentUser(userData.email);
         navigate('/');
       },
-      errorHandler: () => {
-        setErrorMessage('Проверьте правильность введенных данных');
+      errorHandler: (error) => {
+        setErrorMessage(error.message);
       },
     });
   };

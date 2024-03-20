@@ -15,7 +15,9 @@ export const HistoryPage = () => {
             </a>
           ))
         ) : (
-          <span>Здесь будет отображаться история поиска</span>
+          <span className={s.info_message}>
+            Здесь будет отображаться история поиска
+          </span>
         )}
       </div>
     </div>

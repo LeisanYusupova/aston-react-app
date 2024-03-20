@@ -16,8 +16,8 @@ export const SignUp = () => {
         setCurrentUser(userData.email);
         navigate('/');
       },
-      errorHandler: () => {
-        setErrorMessage('Аккаунт с таким именем уже существует');
+      errorHandler: (error) => {
+        setErrorMessage(error.message);
       },
     });
   };

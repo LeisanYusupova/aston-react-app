@@ -13,6 +13,11 @@
     padding-left: 80px;
 }
 
+.info_message {
+    width: 600px;
+    margin-left: -200px;
+}
+
 .link_wrapper {
     width: 200px;
     margin:0 auto;
