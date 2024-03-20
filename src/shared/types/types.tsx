@@ -61,6 +61,7 @@ export type UserProcessState = {
 export type SearchFilmsState = {
   keywords: string[];
   user: string | null;
+  currentSearch: string;
 };
 
 export interface FilmDetailInterface {

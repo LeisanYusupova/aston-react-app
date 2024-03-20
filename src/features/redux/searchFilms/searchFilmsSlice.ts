@@ -4,6 +4,7 @@ import { SearchFilmsState } from 'src/shared/types/types.tsx';
 const initialState: SearchFilmsState = {
   keywords: [],
   user: null,
+  currentSearch: '',
 };
 
 export const searchFilms = createSlice({
@@ -13,6 +14,9 @@ export const searchFilms = createSlice({
     setSearch: (state, action) => {
       state.keywords.push(action.payload.keywords);
       state.user = action.payload.user;
+    },
+    setCurrentSearch: (state, action) => {
+      state.currentSearch = action.payload;
     },
     setSearchFromStorage: (state, action) => {
       state.keywords = action.payload.keywords;
@@ -25,7 +29,11 @@ export const searchFilms = createSlice({
   },
 });
 
-export const { setSearch, setSearchFromStorage, removeSearch } =
-  searchFilms.actions;
+export const {
+  setSearch,
+  setCurrentSearch,
+  setSearchFromStorage,
+  removeSearch,
+} = searchFilms.actions;
 
 export default searchFilms.reducer;

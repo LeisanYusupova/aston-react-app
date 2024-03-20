@@ -1,5 +1,8 @@
 import { createListenerMiddleware } from '@reduxjs/toolkit';
-import { setSearch } from 'src/features/redux/searchFilms/searchFilmsSlice.ts';
+import {
+  setSearch,
+  setCurrentSearch,
+} from 'src/features/redux/searchFilms/searchFilmsSlice.ts';
 
 export const listenerMiddleware = createListenerMiddleware();
 listenerMiddleware.startListening({
@@ -21,6 +24,17 @@ listenerMiddleware.startListening({
           JSON.stringify(newData),
         );
       }
+    }
+  },
+});
+
+listenerMiddleware.startListening({
+  actionCreator: setCurrentSearch,
+  effect: async (action) => {
+    if (action.payload) {
+      localStorage.setItem('currentSearch', action.payload);
+    } else {
+      localStorage.setItem('currentSearch', '');
     }
   },
 });

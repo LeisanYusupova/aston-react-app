@@ -1,13 +1,25 @@
 import { useDispatch } from 'react-redux';
 import { getCurrentUser } from 'src/shared/utils/user.ts';
 import { setUser } from 'src/features/redux/userProcess/userProcessSlice.ts';
-import { getFavoriteItems, getSearchItems } from 'src/shared/utils/storage.ts';
+import {
+  getCurrenSearch,
+  getFavoriteItems,
+  getSearchItems,
+} from 'src/shared/utils/storage.ts';
 import { setFavoritesFromState } from 'src/features/redux/favoriteFilms/favoriteFilmsSlice.ts';
-import { setSearchFromStorage } from 'src/features/redux/searchFilms/searchFilmsSlice.ts';
+import {
+  setCurrentSearch,
+  setSearchFromStorage,
+} from 'src/features/redux/searchFilms/searchFilmsSlice.ts';
 
 export const useStoredState = () => {
   const dispatch = useDispatch();
   const user = getCurrentUser();
+
+  const currentSearch = getCurrenSearch();
+  if (currentSearch) {
+    dispatch(setCurrentSearch(currentSearch));
+  }
 
   if (user) {
     dispatch(setUser({ email: user }));

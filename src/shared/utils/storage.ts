@@ -7,3 +7,8 @@ export const getSearchItems = (user: string) => {
   const items = localStorage.getItem(`${user}-search`);
   return items ? JSON.parse(items) : null;
 };
+
+export const getCurrenSearch = () => {
+  const item = localStorage.getItem('currentSearch');
+  return item ? item : null;
+};
